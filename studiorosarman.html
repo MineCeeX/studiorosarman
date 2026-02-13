@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Rosarman Studio · Silent Quite</title>
+  <!-- Modern sans-serif: Inter + optional monospace for accent -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ———————————— MONOCHROME DARK · CINEMATIC · REFINED ———————————— */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background-color: #000;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.65;
+      font-weight: 300;
+      font-size: 16px;
+      letter-spacing: 0.3px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* —— Master monochrome palette —— */
+    :root {
+      --bg-deep: #000000;
+      --bg-raised: #0b0b0b;
+      --bg-card: #0e0e0e;
+      --border-weak: #1d1d1d;
+      --border-strong: #333;
+      --text-loud: #ffffff;
+      --text-soft: #c0c0c0;
+      --text-mute: #6a6a6a;
+      --accent-line: #ffffff;
+      --transition-slow: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* —— Typography refined —— */
+    h1, h2, h3, h4 {
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(4rem, 15vw, 7rem);
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: clamp(2.5rem, 8vw, 3.8rem);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.03em;
+      border-bottom: 1px solid var(--border-weak);
+      padding-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+    }
+
+    .subhead {
+      color: var(--text-soft);
+      font-size: 1.2rem;
+      font-weight: 300;
+      max-width: 720px;
+      margin-bottom: 2.5rem;
+      border-left: 4px solid #fff;
+      padding-left: 1.8rem;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 6%;
+    }
+
+    section {
+      padding: 130px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+
+    /* —— Cinematic fade transition —— */
+    .fade-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .fade-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* —— Navigation: pure minimal —— */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #1e1e1e;
+      padding: 1.3rem 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      border: 1.5px solid #fff;
+      padding: 0.2rem 0.9rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #ddd;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* —— Hero — vast silence —— */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0;
+      border-bottom: none;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 1100px;
+    }
+
+    .hero-pre {
+      color: #aaa;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .hero-title-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero-meta {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: #b5b5b5;
+      border-left: 4px solid #fff;
+      padding-left: 1.8rem;
+      margin-top: 2.2rem;
+      max-width: 700px;
+    }
+
+    .hero-credit {
+      margin-top: 4rem;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.8rem;
+    }
+
+    /* —— Card system — airy, dark —— */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 1000px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .grid-4, .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: #0a0a0a;
+      border: 1px solid #202020;
+      padding: 2.2rem 1.8rem;
+      transition: var(--transition-slow);
+    }
+
+    .card:hover {
+      border-color: #4a4a4a;
+      background: #0e0e0e;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+      letter-spacing: 2px;
+      color: #fff;
+      border-bottom: 1px solid #2a2a2a;
+      padding-bottom: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .card-text {
+      color: #b0b0b0;
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* —— Progress bar —— */
+    .progress-wrapper {
+      margin-top: 1.8rem;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      color: #999;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .progress-bg {
+      background: #1b1b1b;
+      height: 5px;
+      width: 100%;
+    }
+
+    .progress-fill {
+      background: #e0e0e0;
+      height: 5px;
+      width: 35%;
+      transition: width 0.4s;
+    }
+
+    /* —— Teaser block — cinematic —— */
+    .teaser-frame {
+      background: #080808;
+      border: 1px solid #2a2a2a;
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: 0.5s ease;
+      margin-top: 1rem;
+      color: #aaa;
+    }
+
+    .teaser-frame:hover {
+      border-color: #777;
+      background: #0c0c0c;
+    }
+
+    .teaser-icon {
+      font-size: 2.8rem;
+      color: #fff;
+      opacity: 0.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .teaser-label {
+      letter-spacing: 6px;
+      font-size: 0.9rem;
+      border-top: 1px solid #444;
+      padding-top: 0.8rem;
+    }
+
+    /* —— Collaboration —— */
+    .collab-panel {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background: #070707;
+      border: 1px solid #2a2a2a;
+      padding: 4rem 3.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .collab-mono {
+      font-size: 2.2rem;
+      font-weight: 600;
+      border: 3px solid #fff;
+      padding: 1rem 2.2rem;
+      letter-spacing: 8px;
+    }
+
+    .stat-badge {
+      background: #111;
+      padding: 0.3rem 1rem;
+      border-left: 3px solid #fff;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    /* —— Contact —— */
+    .contact-vault {
+      background: #090909;
+      border: 1px solid #252525;
+      padding: 3.5rem;
+      max-width: 800px;
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #222;
+    }
+
+    .contact-tag {
+      min-width: 120px;
+      font-weight: 600;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+    }
+
+    .contact-addr {
+      color: #ccc;
+      font-weight: 300;
+    }
+
+    .btn {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 1.2rem 3rem;
+      font-size: 0.9rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+      margin-top: 2rem;
+    }
+
+    .btn:hover {
+      background: white;
+      color: black;
+      border-color: white;
+    }
+
+    /* —— footer —— */
+    footer {
+      text-align: center;
+      padding: 4rem 6%;
+      color: #3d3d3d;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      border-top: 1px solid #151515;
+    }
+
+    /* —— micro details —— */
+    hr {
+      border: 0;
+      height: 1px;
+      background: #1e1e1e;
+      margin: 3rem 0;
+    }
+
+    .mono-tag {
+      color: #777;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* responsive fine-tune */
+    @media (max-width: 768px) {
+      .nav-links { gap: 1.8rem; }
+      .nav-links a { font-size: 0.7rem; letter-spacing: 1.5px; }
+      .logo { font-size: 1.3rem; }
+      .collab-panel { flex-direction: column; text-align: center; padding: 2.5rem; gap: 2rem; }
+      .contact-vault { padding: 2rem; }
+      .hero-meta { font-size: 1.1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-container { flex-direction: column; gap: 0.8rem; }
+    }
+
+    /* background grain – subtle cinematic texture */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.028"/></svg>');
+      opacity: 0.2;
+      mix-blend-mode: multiply;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION · floating monochrome -->
+  <nav>
+    <div class="container nav-container">
+      <a href="#hero" class="logo">ROSARMAN</a>
+      <div class="nav-links">
+        <a href="#about">ABOUT</a>
+        <a href="#project">PROJECT</a>
+        <a href="#collab">COLLAB</a>
+        <a href="#contact">JOIN</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ——— HERO · Silent Quite ——— -->
+    <section id="hero" class="hero-section container fade-reveal visible" style="opacity:1; transform:none;">
+      <div class="hero-content">
+        <span class="hero-pre">Rosarman Studio · 2025</span>
+        <h1>
+          <span style="display:block; font-weight:700;">SILENT</span>
+          <span style="display:block; font-weight:300; letter-spacing:-0.02em;">QUITE</span>
+        </h1>
+        <div class="hero-meta">
+          A psychological horror where silence fractures identity.<br>Low soundtrack. With absence.
+        </div>
+        <div class="hero-credit">
+          ────  IN COLLABORATION WITH NOVA PIXEL STUDIO
+        </div>
+      </div>
+    </section>
+
+    <!-- ——— ABOUT · Rosarman Studio ——— -->
+    <section id="about" class="container fade-reveal">
+      <h2>ABOUT STUDIO</h2>
+      <div class="subhead">
+        We shape voids. Rosarman is an indie studio devoted to survival horror, atmospheric dread, and psychological fragility.
+      </div>
+      <div class="grid-2" style="margin-top: 2.5rem;">
+        <div style="border-right:1px solid #2a2a2a; padding-right:2.5rem;">
+          <p style="color:#ccc; font-size:1.2rem; font-weight:300; margin-bottom:2rem;">
+            Founded in 2025, we believe the most profound fear is self-generated. Our games strip away noise, leaving players alone with their thoughts.
+          </p>
+          <span class="mono-tag">——— MINIMALISM AS METHOD</span>
+        </div>
+        <div style="background:#0a0a0a; padding:2rem; border:1px solid #262626;">
+          <span style="color:#777; letter-spacing:3px;">CORE</span>
+          <p style="font-size:2rem; font-weight:200; color:#fff; margin:0.5rem 0 0.8rem;">Atmosphere</p>
+          <div style="width:40px; height:2px; background:#fff; margin:1.2rem 0;"></div>
+          <span style="color:#777; letter-spacing:3px;">ORIENT</span>
+          <p style="font-size:1.4rem; font-weight:300; color:#ddd;">Psychological / Survival horror</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ——— CURRENT PROJECT · Silent Quite ——— -->
+    <section id="project" class="container fade-reveal">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <h2 style="border-bottom:none; padding-bottom:0;">SILENT QUITE</h2>
+        <span style="background:#1a1a1a; padding:0.3rem 1.2rem; color:#fff; letter-spacing:3px; border-radius:0;">IN DEVELOPMENT</span>
+      </div>
+      <div class="subhead" style="border-left-color:#777;">
+        A first-person silent thriller. Set in an abandoned acoustic research station.little monsters — only the slow distortion of reality.
+      </div>
+      
+      <!-- 4-card refined grid -->
+      <div class="grid-4" style="margin:3rem 0 1rem;">
+        <!-- description -->
+        <div class="card">
+          <div class="card-title">DESCRIPTION</div>
+          <p class="card-text">SILENT QUITE is a first-person survival horror set in an abandoned village consumed by darkness and static.
+After receiving a strange radio signal, you arrive to investigate — but something is already there. It listens. It waits.
+With limited resources and only a fragile radio to guide you, every sound could mean danger.
+In this village, silence is never safe.</p>
+        </div>
+        <!-- concept -->
+        <div class="card">
+          <div class="card-title">CONCEPT</div>
+          <p class="card-text">SILENT QUITE is a first-person psychological horror game set in an abandoned village.
+The core mechanic revolves around sound — what you hear, and what hears you.
+With limited resources and a mysterious radio signal guiding you, survival depends on staying quiet… or knowing when not to.</p>
+        </div>
+        <!-- progress with refined bar -->
+        <div class="card">
+          <div class="card-title">PROGRESS</div>
+          <div style="margin-bottom:1rem;">
+            <span class="mono-tag">PRE-PRODUCTION</span>
+          </div>
+          <div class="progress-wrapper">
+            <div class="progress-label">
+              <span>Vertical slice</span>
+              <span>5%</span>
+            </div>
+            <div class="progress-bg"><div class="progress-fill" style="width:5%;"></div></div>
+            <div style="margin-top:1rem; color:#888; font-size:0.85rem;">
+              ▸ World design · Narrative framework
+            </div>
+          </div>
+        </div>
+        <!-- teaser — cinematic placeholder -->
+        <div class="card">
+          <div class="card-title">TEASER</div>
+          <div class="teaser-frame">
+            <span class="teaser-icon">◈</span>
+            <span style="font-size:0.9rem; color:#ccc; letter-spacing:4px;">[ S I L E N T ]</span>
+            <span class="teaser-label">COMING SOON</span>
+          </div>
+        </div>
+      </div>
+      <!-- extra atmospheric line -->
+      <div style="margin-top:2rem; padding:1rem 0; border-top:1px solid #222; display:flex; justify-content:space-between;">
+        <span style="color:#5a5a5a;">「 Quite is not empty. It is full of whispers. 」</span>
+        <span style="color:#444; letter-spacing:2px;">———</span>
+      </div>
+    </section>
+
+    <!-- ——— COLLABORATION · Nova Pixel Studio ——— -->
+    <section id="collab" class="container fade-reveal">
+      <h2>COLLABORATION</h2>
+      <div class="subhead">
+        Silent Quite is co-created with <strong style="color:#fff;">Nova Pixel Studio</strong> — masters of low-light environmental art.
+      </div>
+      <div class="collab-panel">
+        <div style="max-width:55%;">
+          <span class="stat-badge">EST. 2026</span>
+          <h3 style="font-size:2.2rem; font-weight:400; margin:1rem 0 0.5rem;">NOVA PIXEL</h3>
+          <p style="color:#aaa; font-size:1.1rem; line-height:1.6;">
+            Specialists in atmospheric pixel art and diegetic lighting. Together we are constructing the unnerving, texture-rich world of Silent Quite.
+          </p>
+          <p style="color:#777; margin-top:1.5rem;">✦ VFX, lighting, environment narrative ✦</p>
+        </div>
+        <div class="collab-mono">
+          N·P
+        </div>
+      </div>
+      <!-- partnership statement minimal -->
+      <div style="margin-top:2rem; border-left:5px solid #fff; background:#0c0c0c; padding:1.8rem;">
+        <p style="color:#ccc; font-size:1.1rem; font-weight:300;">Both studios share an obsession with silence as a narrative device. </p>
+      </div>
+    </section>
+
+    <!-- ——— CONTACT / JOIN US ——— -->
+    <section id="contact" class="container fade-reveal">
+      <h2>JOIN THE SILENT PROJECT</h2>
+      <div class="subhead" style="border-left-color:#777;">
+        We are seeking narrative designers, sound artists, and Unreal engineers who understand that less is more.
+      </div>
+      <div class="contact-vault">
+        <div class="contact-line">
+          <span class="contact-tag">DIRECTOR</span>
+          <span class="contact-addr">miminecee21@gmail.com</span>
+        </div>
+        <div class="contact-line">
+          <span class="contact-tag">PRESS</span>
+          <span class="contact-addr">miminecee22@gmail.com</span>
+        </div>
+        <div class="contact-line">
+          <span class="contact-tag">CAREERS</span>
+          <span class="contact-addr">fuzzy2nd@gmail.com</span>
+        </div>
+        <div style="margin-top:2rem; color:#888; border-left:2px solid #444; padding-left:1.5rem;">
+          Send portfolio and a few words about your relationship with silence. We read every message.
+        </div>
+        <button class="btn">SEND INQUIRY</button>
+      </div>
+      <div style="margin-top:3rem; color:#444; letter-spacing:4px; font-size:0.7rem; text-align:right;">
+        — NO CLOSING DATES —
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER · still, quiet -->
+  <footer>
+    <div style="margin-bottom:1.8rem;">
+      <span style="border-bottom:1px solid #3a3a3a; padding-bottom:0.5rem;">ROSARMAN STUDIO</span>
+    </div>
+    <div style="display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap; margin-bottom:2rem; color:#4a4a4a;">
+      <span>Silence</span>
+      <span>◆</span>
+      <span>Dread</span>
+      <span>◆</span>
+      <span>Echo</span>
+      <span>◆</span>
+      <span>Void</span>
+    </div>
+    <div style="color:#3a3a3a; font-weight:200;">
+      © 2025 Rosarman Studio · Monochrome identity · All rights reserved
+    </div>
+  </footer>
+
+  <!-- Intersection Observer for refined reveal -->
+  <script>
+    (function() {
+      const reveals = document.querySelectorAll('.fade-reveal');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -50px 0px' });
+
+      reveals.forEach(el => observer.observe(el));
+      
+      // force hero to stay visible
+      document.querySelector('#hero')?.classList.add('visible');
+      
+      // button interaction (elegant)
+      const btn = document.querySelector('.btn');
+      if(btn) {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('📮 Inquiry channel opens soon. For now, write to join@rosarman.studio');
+        });
+      }
+
+      // additional smooth for already visible on load
+      window.addEventListener('load', function() {
+        reveals.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) {
+            el.classList.add('visible');
+          }
+        });
+      });
+    })();
+  </script>
+  <!-- subtle grain overlay already in css -->
+</body>
+</html>
